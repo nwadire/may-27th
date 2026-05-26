@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Children's Day</title>
+
+  <link rel="icon" href="https://img.icons8.com/emoji/48/000000/baby-emoji.png" type="image/png">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Comic Sans MS", "Arial Rounded MT Bold", sans-serif;
+    }
+
+    .container {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+      text-align: center;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 60px 40px;
+      border-radius: 25px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h1 {
+      color: #ff4757;
+      font-size: 3.8rem;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.4rem;
+      color: #2f3542;
+      margin-bottom: 40px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 20px;
+      margin: 15px 0;
+      font-size: 1.5rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .under18 { background: #1abc9c; color: white; }
+    .over18 { background: #e74c3c; color: white; }
+
+    .btn:hover { transform: scale(1.08); }
+
+    .kids-page {
+      display: none;
+      min-height: 100vh;
+      background: linear-gradient(to bottom, #a8e6cf, #ffd93d, #ff6b6b);
+      background-image:
+        linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+        url("https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&q=80");
+      background-size: cover;
+      background-position: center;
+      overflow-y: auto;
+    }
+
+    .header {
+      text-align: center;
+      padding: 30px 20px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #ff4757;
+      font-size: 2.8rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .wishes-container {
+      padding: 40px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+    }
+
+    .wish-card {
+      background: white;
+      border-radius: 20px;
+      padding: 30px 25px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      transition: all 0.4s;
+      border: 5px solid #ffd93d;
+    }
+
+    .wish-card:hover {
+      transform: translateY(-15px) scale(1.05);
+      border-color: #ff6b6b;
+    }
+
+    .wish-card h2 {
+      color: #ff4757;
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+    }
+
+    .wish-card p {
+      color: #2f3542;
+      font-size: 1.25rem;
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+
+    .emoji {
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .video-section {
+      max-width: 1100px;
+      margin: 0 auto 20px;
+      padding: 0 20px 20px;
+    }
+
+    .video-card {
+      background: white;
+      border-radius: 20px;
+      padding: 28px 24px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      border: 5px solid #4ecdc4;
+    }
+
+    .video-card h2 {
+      color: #ff4757;
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+
+    .video-card p {
+      color: #2f3542;
+      font-size: 1.15rem;
+      margin-bottom: 18px;
+    }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .video-frame iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 30px;
+      color: white;
+      font-size: 1.4rem;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <div id="ageGate" class="container">
+    <div class="card">
+      <h1>&#127881; Children's Day &#127881;</h1>
+      <p>How old are you?</p>
+      <button class="btn under18" onclick="enterKidsMode()">I am under 18</button>
+      <button class="btn over18" onclick="showPrank()">I am 18 years old or older</button>
+    </div>
+  </div>
+
+  <div id="kidsPage" class="kids-page">
+    <div class="header">&#127880; Happy Children's Day! &#127880;</div>
+
+    <div class="wishes-container" id="wishesContainer"></div>
+
+    <div class="video-section">
+      <div class="video-card">
+        <h2>Special Video for You</h2>
+        <p>Press play and enjoy this video right here on the wishing page.</p>
+        <div class="video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/ITodWbjP8Ps?rel=0&modestbranding=1&playsinline=1"
+            title="Children's Day video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      &#127775; Wishing all children a day full of joy, laughter and wonderful dreams! &#127775;
+    </div>
+  </div>
+
+  <div id="prankPage" style="display:none; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:linear-gradient(45deg,#8e44ad,#c0392b); color:white; text-align:center;">
+    <h1>&#128514; Nice try!</h1>
+    <h2>You are clearly lying...</h2>
+    <p style="font-size:1.5rem; margin:25px 0;">Go back and choose the correct option, little one! &#128064;</p>
+    <button onclick="goBack()" style="padding:18px 45px; font-size:1.4rem; background:white; color:#c0392b; border:none; border-radius:50px; cursor:pointer;">Go Back</button>
+  </div>
+
+  <script>
+    const wishes = [
+      {
+        emoji: "&#127775;",
+        title: "Happy Children's Day!",
+        text: "May your day be filled with laughter, play, and endless joy!"
+      },
+      {
+        emoji: "&#127880;",
+        title: "You are Special",
+        text: "You bring so much happiness and light to the world. Keep shining!"
+      },
+      {
+        emoji: "&#127968;",
+        title: "Dream Big",
+        text: "Your dreams are powerful. Believe in yourself and fly high!"
+      },
+      {
+        emoji: "&#127912;",
+        title: "Be Creative",
+        text: "Color your world with beautiful ideas and wonderful imagination!"
+      },
+      {
+        emoji: "&#129309;",
+        title: "Friendship",
+        text: "May you always have friends who play, laugh, and grow with you."
+      },
+      {
+        emoji: "&#127752;",
+        title: "Full of Wonders",
+        text: "Every day is a new adventure. Enjoy every moment!"
+      }
+    ];
+
+    function renderWishes() {
+      const container = document.getElementById("wishesContainer");
+      container.innerHTML = "";
+
+      wishes.forEach(wish => {
+        const card = document.createElement("div");
+        card.className = "wish-card";
+        card.innerHTML = `
+          <span class="emoji">${wish.emoji}</span>
+          <h2>${wish.title}</h2>
+          <p>${wish.text}</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function enterKidsMode() {
+      document.getElementById("ageGate").style.display = "none";
+      document.getElementById("kidsPage").style.display = "block";
+      renderWishes();
+    }
+
+    function showPrank() {
+      document.getElementById("ageGate").style.display = "none";
+      document.getElementById("prankPage").style.display = "flex";
+    }
+
+    function goBack() {
+      document.getElementById("prankPage").style.display = "none";
+      document.getElementById("ageGate").style.display = "flex";
+    }
+  </script>
+</body>
+</html>
